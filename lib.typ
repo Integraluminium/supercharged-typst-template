@@ -38,6 +38,16 @@
   "⓵",
 )
 
+// track outlining for flex-caption, which is used in figure captions
+#let in-outline = state("in-outline", false)
+#show outline: it => {
+  in-outline.update(true)
+  it
+  in-outline.update(false)
+}
+#let flex-caption(long, short) = context if in-outline.get() { short } else { long }
+
+
 #let supercharged-dhbw(
   title: none,
   authors: (:),
