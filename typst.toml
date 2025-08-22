@@ -1,11 +1,11 @@
 [package]
-name = "supercharged-dhbw-michalskyl"
+name = "supercharged-dhbw-integraluminium"
 version = "3.4.1"
 entrypoint = "lib.typ"
-authors = ["Danny Seidel <@DannySeidel>"]
+authors = ["Danny Seidel <@DannySeidel>". "MichalskyL <@MichalskyL>", "Integraluminium <@Integraluminium>"]
 license = "MIT"
 description = "Unofficial Template for DHBW"
-repository = "https://github.com/MichalskyL/supercharged-typst-template-michalskyl"
+repository = "https://github.com/Integraluminium/supercharged-typst-template"
 keywords = ["dhbw", "thesis"]
 categories = ["paper", "thesis", "report"]
 exclude = ["examples/**", "CHANGELOG.md"]
