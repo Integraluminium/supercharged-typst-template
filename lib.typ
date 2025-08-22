@@ -64,6 +64,8 @@
   show-list-of-tables: true,
   show-code-snippets: true,
   show-abstract: true,
+  show-left-logo: false,
+  show-right-logo: false,
   numbering-alignment: center,
   toc-depth: 3,
   acronym-spacing: 5em,
@@ -76,6 +78,7 @@
   confidentiality-statement-content: none,
   declaration-of-authorship-content: none,
   titlepage-content: none,
+  time-range: none,
   university: none,
   university-location: none,
   university-short: none,
@@ -88,6 +91,7 @@
   heading-numbering: "1.1",
   math-numbering: "(1)",
   page-numbering: (preface: "I", main: "1 / 1", appendix: "a"),
+  use-global-page-numbering: false,
   logo-left: image("dhbw.svg"),
   logo-right: none,
   logo-size-ratio: "1:1",
@@ -111,6 +115,8 @@
     show-list-of-tables,
     show-code-snippets,
     show-abstract,
+    show-left-logo,
+    show-right-logo,
     header,
     numbering-alignment,
     toc-depth,
@@ -134,6 +140,8 @@
     math-numbering,
     ignored-link-label-keys-for-highlighting,
     page-numbering,
+    use-global-page-numbering,
+    time-range,
   )
 
   // set the document's basic properties
@@ -207,6 +215,7 @@
       right-logo-height,
       supervisor,
       title,
+      time-range,
       type-of-degree,
       type-of-thesis,
       university,
@@ -241,13 +250,13 @@
   let show-header-left-logo = if (header != none and ("show-left-logo" in header)) {
     header.show-left-logo
   } else {
-    true
+    show-left-logo
   }
 
   let show-header-right-logo = if (header != none and ("show-right-logo" in header)) {
     header.show-right-logo
   } else {
-    true
+    show-right-logo
   }
 
   let show-header-divider = if (header != none and ("show-divider" in header)) {
@@ -304,10 +313,10 @@
               stack(
                 dir: ltr,
                 spacing: 1em,
-                // if (show-header-left-logo and logo-left != none) {
-                //   set image(height: left-logo-height / 2)
-                //   logo-left
-                // },
+                if (show-header-left-logo and logo-left != none) {
+                  set image(height: left-logo-height / 2)
+                  logo-left
+                },
                 if (show-header-right-logo and logo-right != none) {
                   set image(height: right-logo-height / 2)
                   logo-right
@@ -347,7 +356,9 @@
       )
     },
   )
-  counter(page).update(1)
+  if not use-global-page-numbering {
+    counter(page).update(1)
+  }
 
   if (not at-university and show-confidentiality-statement) {
     pagebreak()
@@ -486,7 +497,9 @@ context {
       )
     },
   )
-  counter(page).update(1)
+  if not use-global-page-numbering {
+    counter(page).update(1)
+  }
 
   body
 
