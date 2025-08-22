@@ -9,9 +9,13 @@
 }
 
 // Display acronym. Expands it if used for the first time
-#let gls(element, link: true) = {
-  display("glossary", glossary-state, element, element, link: link)
+#let gls(element, text: "", link: true) = {
+  if (text == ""){
+    text = element
+  }
+  display("glossary", glossary-state, element, text, link: link)
 }
+
 
 // Print an index of all the acronyms and their definitions.
 #let print-glossary(language, glossary-spacing) = {
