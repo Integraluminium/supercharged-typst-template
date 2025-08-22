@@ -378,11 +378,10 @@
       date-format,
     )
   }
-
-  show outline.entry.where(level: 1): it => {
-    v(18pt, weak: true)
-    strong(it)
-  }
+  // show outline.entry.where(level: 1): it => {
+  //   v(18pt, weak: true)
+  //   strong(it)
+  // }
 
   set par(justify: true, leading: 1em)
 
@@ -394,12 +393,24 @@
   set par(leading: 0.65em)
 
   if (show-table-of-contents) {
+    // first level of table of contents is printed in bold
+    show outline.entry.where(level: 1): it => {
+    v(18pt, weak: true)
+    strong(it)
+  }
+
     outline(
       title: TABLE_OF_CONTENTS.at(language),
       indent: auto,
       depth: toc-depth,
     )
   }
+
+context {
+      // print the prefix in the figure tables in bold: *Abbildung* beschreibungstext
+      show outline.entry: it => {
+      it.indented(strong(it.prefix()), it.inner())
+    }
 
   context {
     let elems = query(figure.where(kind: image))
@@ -436,6 +447,7 @@
       )
     }
   }
+}
 
   if (show-acronyms and acronyms != none and acronyms.len() > 0) {
     print-acronyms(language, acronym-spacing)
